@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+    <link rel="stylesheet" type="text/css" href="css/untitled.css">
+    <script src="resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-language="en" data-sap-ui-libs="sap.ui.commons,sap.ui.table,sap.ui.ux3" data-sap-ui-theme="sap_goldreflection">
+    </script>
+    <script>
+        sap.ui.localResources("untitled");
+        sap.ui.localResources("util");
+        sap.ui.localResources("i18n");
+//        var oView = sap.ui.view({
+//            viewName: "untitled.Main",
+//            type: sap.ui.core.mvc.ViewType.XML
+//        });
+//        oView.placeAt("content");
+    </script>
+
+    <script>
+        var btn = new sap.ui.commons.Button({
+            text:'Hello button'
+        });
+        btn.placeAt('content');
+
+    </script>
+
+
+    <script>
+        var textField = new sap.ui.commons.TextField("field777",{value:"Value of field 1"});
+        textField.placeAt('footer');
+
+        var oButton = new sap.ui.commons.Button("button", {text:"My button"});
+        oButton.placeAt('footer');
+        oButton.attachPress(function(){
+
+            // finds object by id
+            //var core = sap.ui.getCore().byId('field777').value;
+            // finds html element
+           // var core = jQuery.sap.domById("field777");
+            //alert(core);
+
+            var model = new sap.ui.model.json.JSONModel("{'name':'vasia', 'surname':'palapa'}");
+
+            alert(model.name);
+
+
+
+            // binding models
+            //global model
+            /*sap.ui.getCore.setModel(model);
+
+            var myView  = sap.ui.view({type:sap.ui.core.mvc.ViewType.JS, viewName:"test.view"});
+            myView.setModel(model);
+            */
+
+        });
+
+
+    </script>
+
+
+    <script>
+        var mydata = {info: "John doe 777"};
+
+        var oModel = new sap.ui.model.json.JSONModel();
+
+        oModel.setData(mydata);
+
+        sap.ui.getCore().setModel(oModel);
+
+        var oText = new sap.ui.commons.TextField({
+            value : "{/info}"
+        });
+
+        oText.placeAt("binding_model");
+
+    </script>
+
+
+    <script>
+
+       // var oItemTemplate = new sap.ui.core.ListItem({text: "{aggrProperty}"});
+
+//        var oComboBox = new sap.ui.commons.ComboBox({
+//            items: {path: "/modelAggregation", template: oItemTemplate}
+//        });
+
+//        oComboBox.bindAggregation("items","/modelAggregation", oItemTemplate);
+
+
+        //************************************** bind property
+
+//      1  var oControl = new sap.ui.commons.TextView({controlProperty:"{modelProperty}"});
+
+//      2  oControl.bindProperty("controlProperty","modelProperty");
+
+      //  var oControl = new sap.ui.commons.TextView
+
+    </script>
+
+
+    <script>
+
+        var oModel = new sap.ui.model.json.JSONModel();
+        oModel.setJSON('{"selection" : "All kinds" , "data" : [{"text" : "cucumber"}, {"text":"tomato"} ,{"text":"onion"}]}');
+
+        var oItemTemplate = new sap.ui.core.ListItem("name" , {text: "{text}"});
+
+        var oComboBox = new sap.ui.commons.ComboBox("ComboBox1" , {items:{
+            path:"/data",
+            template : oItemTemplate,
+        }});
+
+        oComboBox.setModel(oModel);
+        oComboBox.bindObject("/selection");
+        oComboBox.placeAt("combobox");
+
+
+    </script>
+
+    <script>
+        var model = new sap.ui.model.json.JSONModel('"users" : [{"name" : "vasia"},{"name" : "petro"},{"name" : "mikola"}]');
+
+
+
+    </script>
+
+</head>
+<body class="sapUiBody" role="application">
+
+    <div id="content"></div>
+    <div id="footer"></div>
+
+    <div id="binding_model"></div>
+    <div id="combobox"></div>
+
+<div id="listview"></div>
+
+</body>
+</html>

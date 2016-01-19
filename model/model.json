@@ -1,0 +1,24 @@
+{
+  "collection": [
+    {
+      "name": "ivan",
+      "surname": "petrenko"
+    },
+    {
+      "name": "petro",
+      "surname": "ivanenko"
+    },
+    {
+      "name": "ihor",
+      "surname": "serdenko"
+    },
+    {
+      "name": "pilip",
+      "surname": "makov"
+    },
+    {
+      "name": "zenia",
+      "surname": "illias"
+    }
+  ]
+}
