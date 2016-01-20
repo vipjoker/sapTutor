@@ -4,8 +4,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
     <link rel="stylesheet" type="text/css" href="css/untitled.css">
-    <script src="resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-language="en" data-sap-ui-libs="sap.ui.commons,sap.ui.table,sap.ui.ux3" data-sap-ui-theme="sap_goldreflection">
+    <script src="resources/sap-ui-core.js" 
+            id="sap-ui-bootstrap" 
+            data-sap-ui-language="en" 
+            data-sap-ui-theme="sap_bluecrystal"
+            data-sap-ui-libs="sap.ui.commons,sap.m,sap.ui.table,sap.ui.ux3" >
     </script>
+     data-sap-ui-libs="sap.ui.commons,sap.m,sap.ui.table,sap.ui.ux3"
+    rc="resources/sap-ui-core.js" 
     <script>
         sap.ui.localResources("untitled");
         sap.ui.localResources("util");
@@ -103,27 +109,57 @@
     <script>
 
         var oModel = new sap.ui.model.json.JSONModel();
-        oModel.setJSON('{"selection" : "All kinds" , "data" : [{"text" : "cucumber"}, {"text":"tomato"} ,{"text":"onion"}]}');
-
-        var oItemTemplate = new sap.ui.core.ListItem("name" , {text: "{text}"});
-
-        var oComboBox = new sap.ui.commons.ComboBox("ComboBox1" , {items:{
+//        oModel.setJSON('{"selection" : "All kinds" , "data" : [{"text" : "cucumber"}, {"text":"tomato"} ,{"text":"onion"}]}');
+//        
+        
+        
+        
+        //        var link = "http://api.geonames.org/citiesJSON?north=44.1&south=-9.9&east=-22.4&west=55.2&lang=de&username=demo";        
+        
+        
+        
+        
+        var oItemTemplate = new sap.m.ActionListItem("item" , {text: "{name}"});
+        
+        
+        oItemTemplate.attachPress(function(){
+             alert(this.getText());
+        });
+        
+        var oComboBox = new sap.m.List("ComboBox1" , {items:{
             path:"/data",
             template : oItemTemplate,
         }});
-
-        oComboBox.setModel(oModel);
+          
+        
+        getData(oComboBox)
+       
         oComboBox.bindObject("/selection");
         oComboBox.placeAt("combobox");
-
-
-    </script>
-
-    <script>
-        var model = new sap.ui.model.json.JSONModel('"users" : [{"name" : "vasia"},{"name" : "petro"},{"name" : "mikola"}]');
-
-
-
+        
+        //******************************
+        
+            
+    
+        
+        
+        function getData( oComboBox){
+            
+                        
+        var oModel = new sap.ui.model.json.JSONModel();
+            
+             jQuery.ajax({
+                    url: "http://localhost:8080/ums/testuser",
+                    success: function( data ) {
+                        
+                        oModel.setData(data);
+                        oComboBox.setModel(oModel);
+                }
+            });
+        }
+        
+    
+        
     </script>
 
 </head>
@@ -135,6 +171,11 @@
     <div id="binding_model"></div>
     <div id="combobox"></div>
 
+    
+    
+    <div id="weather-temp">
+    </div>
+    
 <div id="listview"></div>
 
 </body>
