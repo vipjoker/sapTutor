@@ -8,19 +8,21 @@
             id="sap-ui-bootstrap" 
             data-sap-ui-language="en" 
             data-sap-ui-theme="sap_bluecrystal"
-            data-sap-ui-libs="sap.ui.commons,sap.m,sap.ui.table,sap.ui.ux3" >
+            data-sap-ui-libs="sap.ui.commons,sap.m,sap.ui.table,sap.ui.ux3" 
+            data-sap-ui-resourceroots='{"xxx": "myViews/"}'>
+
+            >
     </script>
-     data-sap-ui-libs="sap.ui.commons,sap.m,sap.ui.table,sap.ui.ux3"
-    rc="resources/sap-ui-core.js" 
+   
     <script>
-        sap.ui.localResources("untitled");
-        sap.ui.localResources("util");
-        sap.ui.localResources("i18n");
-//        var oView = sap.ui.view({
-//            viewName: "untitled.Main",
-//            type: sap.ui.core.mvc.ViewType.XML
-//        });
-//        oView.placeAt("content");
+       
+//        sap.ui.localResources("util");
+//        sap.ui.localResources("i18n");
+        var oView = sap.ui.view({
+            viewName: "xxx.Main",
+            type: sap.ui.core.mvc.ViewType.XML
+        });
+        oView.placeAt("content");
     </script>
 
     <script>

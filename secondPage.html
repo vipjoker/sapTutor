@@ -6,8 +6,11 @@
 
 
     <link rel="stylesheet" type="text/css" href="css/untitled.css">
-    <script src="resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-language="en"
-            data-sap-ui-libs="sap.m,sap.ui.commons,sap.ui.table,sap.ui.ux3" data-sap-ui-theme="sap_goldreflection">
+    <script src="resources/sap-ui-core.js" 
+            id="sap-ui-bootstrap" 
+            data-sap-ui-language="en"
+            data-sap-ui-libs="sap.m,sap.ui.commons,sap.ui.table,sap.ui.ux3" 
+             data-sap-ui-theme="sap_bluecrystal">
     </script>
     <script>
         sap.ui.localResources("untitled");
@@ -28,6 +31,28 @@
 
         var oText1 = new sap.m.Input({value:"", placeholder:"Enter a first name"});
         var oText2 = new sap.m.List({value: "" ,placeholder:"Enter last name"});
+          var oItemTemplate = new sap.m.ActionListItem("item" , {text: "{name}"});
+        
+        
+        oItemTemplate.attachPress(function(){
+             alert(this.getText());
+            app.to(page2);
+        });
+        
+        var listView = new sap.m.List("ComboBox1" , {items:{
+            path:"/data",
+            template : oItemTemplate,
+        }});
+          
+        
+        getData(listView)
+       
+      
+      
+        
+        
+        
+        
 
         var page = new sap.m.Page("page1",{
             title: "Olehs page",
@@ -36,18 +61,56 @@
                     oText1,
                     new sap.m.Label({text: "Last Name"}),
                     oText2,
+                    listView,
+                
                     new sap.m.Button({
                         text:"Sumbimit",
                         tap: function(){
-                            sap.ui.getCore().byId("label1").setText("Hallo, " + oText1.getValue()+ " "  + oText2.getValue());
-                            app.to("page2");
+                         
+                            app.to(page2);
+                        }
+                    })
+            ]
+        });
+        
+        
+        var page2 = new sap.m.Page("page2",{
+            title: "Olehs second  page",
+            content:[
+                    new sap.m.Label({text: "First  Name"}),
+                   
+                    new sap.m.Label({text: "Hello"}),
+                  
+                    new sap.m.Button({
+                        text:"go back",
+                        tap: function(){
+                            app.back();
+//                            app.to(page1);
                         }
                     })
             ]
         });
 
         app.addPage(page);
+        app.addPage(page2);
         app.placeAt("container");
+        
+        
+        
+        
+        
+        function getData( oComboBox){          
+        var oModel = new sap.ui.model.json.JSONModel();
+            
+             jQuery.ajax({
+                    url: "http://localhost:8080/ums/testuser",
+                    success: function( data ) {
+                        
+                        oModel.setData(data);
+                        oComboBox.setModel(oModel);
+                }
+            });
+        }
 
     </script>
 
